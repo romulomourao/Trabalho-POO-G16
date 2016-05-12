@@ -16,7 +16,7 @@ public class Colecoes {
     private static java.util.List<Caixa> caixa = new ArrayList<>();
     private static java.util.List<Gerente> gerentes = new ArrayList<>();
 
-    public void addProduto(Produto produto) {
+    static void addProduto(Produto produto) {
         boolean existe = false;
         for (int i = 0; i < produtos.size(); i++) {
             if (produtos.get(i).getCodBarras() == produto.getCodBarras()) {

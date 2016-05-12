@@ -23,13 +23,13 @@ public class Mercado {
         Gerente manager = new Gerente("Romulo", "12925654703", "123456");
         System.out.println(manager.getCpf() + " " + manager.getNome());
         
-        Colecoes bancoDeDados = new Colecoes();
-        novoProduto(in, bancoDeDados);
-        novaVenda(in, bancoDeDados);
+        
+        novoProduto(in);
+        novaVenda(in);
 
     }
 
-    private static void novaVenda(Scanner in, Colecoes estoque) {
+    private static void novaVenda(Scanner in) {
         //Inicializa ArrayList com os produtos que serão comprados pelo cliente
         ArrayList<Produto> compraAtual;
         compraAtual = new ArrayList<>();
@@ -40,7 +40,7 @@ public class Mercado {
         while (computando) {
             System.out.println("");
             String codBarras = in.nextLine();
-            sendoComprado = procuraProduto(codBarras, estoque);
+            sendoComprado = procuraProduto(codBarras);
             if (sendoComprado.isVendidoPorPeso()) {
                 //Se for TRUE ele vai pegar o valor 
                 System.out.println("Qual a quantidade em gramas de" + sendoComprado.getNome() + "? (apenas números)");
@@ -58,12 +58,11 @@ public class Mercado {
         }
     }
 
-    private static Produto procuraProduto(String novoItem, Colecoes estoque) {
-       Produto procurado =  
-     
+    private static Produto procuraProduto(String novoItem) {     
+        return Colecoes.findProduto(novoItem);
     }
 
-    private static void novoProduto(Scanner in, Colecoes estoque) {
+    private static void novoProduto(Scanner in) {
         boolean vendidoPorPeso = false;
         System.out.println("---| NOVO PRODUTO |---");
         System.out.println("COD.  : ");
@@ -82,7 +81,7 @@ public class Mercado {
         }
         //Cria novo produto com a entrada do gerente e adiciona no "banco de dados"
         Produto novo = new Produto(nome, descricao, vendidoPorPeso, codBarras, preco, qtdEstoque);
-        estoque.addProduto(novo);
+        Colecoes.addProduto(novo);
 
     }
 
