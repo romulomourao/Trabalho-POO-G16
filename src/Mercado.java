@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import javafx.scene.input.KeyEvent;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,9 +23,11 @@ public class Mercado {
         Scanner in = new Scanner(System.in);
         Gerente manager = new Gerente("Romulo", "12925654703", "123456");
         System.out.println(manager.getCpf() + " " + manager.getNome());
-        
-        
-        novoProduto(in);
+        Produto novo = new Produto("Palito Paraná", "Caixa de Palitos de dente", false, "7896080900001", 2.50, 100);
+        Colecoes.addProduto(novo);
+        novo = new Produto("Ovomaltine", "300g de Achocolatado com flocos crocantes", false, "7898409951404", 6.90, 50);
+        Colecoes.addProduto(novo);
+        //novoProduto(in);
         novaVenda(in);
 
     }
@@ -38,27 +41,41 @@ public class Mercado {
         double total = 0;
         boolean computando = true;
         while (computando) {
-            System.out.println("");
+            System.out.println("0 - CANCELAR COMPRA");
+            System.out.println("1 - FINALIZAR COMPRA");
+            System.out.print("Cod. do Produto: ");
             String codBarras = in.nextLine();
+            if (codBarras.equals("0")) {
+                System.out.println("| COMPRA CANCELADA |");
+                break;
+            }
+
             sendoComprado = procuraProduto(codBarras);
-            if (sendoComprado.isVendidoPorPeso()) {
+            if (sendoComprado == null) {
+                System.out.println("PRODUTO NÃO EXISTE");
+                System.out.println("");
+            } else if (sendoComprado.isVendidoPorPeso()) {
                 //Se for TRUE ele vai pegar o valor 
                 System.out.println("Qual a quantidade em gramas de" + sendoComprado.getNome() + "? (apenas números)");
                 gramas = in.nextInt();
                 total += ((gramas * sendoComprado.getPreco()) / 1000);
+                in.nextLine();
 
             } else {
                 System.out.println("Quantas unidades de " + sendoComprado.getNome() + "? (apenas números)");
                 unidades = in.nextInt();
-                total += (unidades * sendoComprado.getPreco());
-            }
 
+                total += ((int) unidades * sendoComprado.getPreco());
+                in.nextLine();
+
+            }
+            
             System.out.println("Subtotal: " + total);
 
         }
     }
 
-    private static Produto procuraProduto(String novoItem) {     
+    private static Produto procuraProduto(String novoItem) {
         return Colecoes.findProduto(novoItem);
     }
 
@@ -75,8 +92,8 @@ public class Mercado {
         double preco = in.nextDouble();
         System.out.println("QTD   : ");
         double qtdEstoque = in.nextDouble();
-        System.out.println(nome+" é vendido por peso? (s/n): ");
-        if(in.next().equals("s")){
+        System.out.println(nome + " é vendido por peso? (s/n): ");
+        if (in.next().equals("s")) {
             vendidoPorPeso = true;
         }
         //Cria novo produto com a entrada do gerente e adiciona no "banco de dados"
