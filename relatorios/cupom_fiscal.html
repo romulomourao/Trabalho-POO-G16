@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SUPERMERCADO JAVA</title>
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="style-cupom.css">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="cupom">
+		<table id="header">
+			<tr>
+				<td><img src="java.png" width="100px" height="100px" alt=""></td>
+				<td><p>JAVA SUPERMERCADO</p></td>
+			</tr>
+			<tr>
+				<td>ID</td>
+				<td>DATA</td>
+				
+			</tr>	
+			<tr>
+				<td>CLIENTE</td>
+				<td>ID</td>
+				
+			</tr>				
+		</table>
+	  <div id="users">
+	  <input class="search" placeholder="Procurar" />
+	  <button class="sort" data-sort="name">Ordenar por nome</button>
+	  <button class="sort" data-sort="born">Ordenar por preço</button>
+	  <table>
+	    <!-- IMPORTANT, class="list" have to be at tbody -->
+	    <tbody class="list">
+	      <tr>
+	        <td class="name">Jonny Stromberg</td>
+	        <td class="born">1986</td>
+	      </tr>
+	      <tr>
+	        <td class="name">Jonas Arnklint</td>
+	        <td class="born">1985</td>
+	      </tr>
+	      <tr>
+	        <td class="name">Martina Elm</td>
+	        <td class="born">1986</td>
+	      </tr>
+	      <tr>
+	        <td class="name">Gustaf Lindqvist</td>
+	        <td class="born">1983</td>
+	      </tr>
+	    </tbody>
+	  </table>
+
+	</div>
+		
+	</div>
+	<script src="list.js"></script>
+	<script src="entrada.js"></script>
+</body>
+</html>

@@ -1,9 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
+        <file>
+            <url>src/view/JanelaCadastroProduto.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>61</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/view/CampoFormatado.java</url>
+            <bookmark id="2">
+                <name/>
+                <line>52</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/Mercado.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/model/Data.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/model/ItemEstoqueQuilo.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/model/OperacaoNoBanco.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/model/Venda.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/model/ItemDeVenda.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/model/Produto.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/view/Tabela.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/model/Pagamento.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/view/Tela.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/view/TelaDeLogin.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/view/CampoDeTexto.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/model/Estoque.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/view/PainelDeUsuario.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/view/ProdutosModeloTabela.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/controller/EventoConsultarProduto.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/model/Pessoa.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/view/Mercado.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/model/Funcionario.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/model/ItemEstoque.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/controller/ActionVenda.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/view/PainelDeVendas.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/model/Caixa.java</file>
+            <file>file:/home/romulo/NetBeansProjects/MercadoDoFuturo/src/view/PainelDeConsulta.java</file>
         </group>
     </open-files>
 </project-private>

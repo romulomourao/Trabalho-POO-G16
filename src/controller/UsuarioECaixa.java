@@ -3,16 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package controller;
+
+import model.Funcionario;
 
 /**
  *
- * @author romul
+ * @author romulo
  */
-public class Caixa extends Funcionario{
-    
-    
-    public Caixa(String nome, String cpf) {
-        super(nome, cpf,true);
+public class UsuarioECaixa {
+
+    public UsuarioECaixa() {
     }
     
+    public Funcionario retornaTodos(){
+        
+        return null;
+    }
 }

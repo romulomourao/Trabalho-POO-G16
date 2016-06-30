@@ -1,0 +1,10 @@
+</tbody>
+	  </table>
+
+	</div>
+		
+	</div>
+	<script src="list.js"></script>
+	<script src="entrada.js"></script>
+</body>
+</html>

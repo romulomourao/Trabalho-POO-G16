@@ -1,4 +1,5 @@
 
+import model.ItemDeVenda;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,23 +21,20 @@ public class Mercado {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        Gerente manager = new Gerente("Romulo", "12925654703", "123456");
-        System.out.println(manager.getCpf() + " " + manager.getNome());
-        Produto novo = new Produto("Palito Paraná", "Caixa de Palitos de dente", false, "7896080900001", 2.50, 100);
-        Colecoes.addProduto(novo);
-        novo = new Produto("Ovomaltine", "300g de Achocolatado com flocos crocantes", false, "7898409951404", 6.90, 50);
-        Colecoes.addProduto(novo);
-        //novoProduto(in);
-        novaVenda(in);
+    
 
     }
+    /*
 
-    private static void novaVenda(Scanner in) {
+    private static void novaVenda(Scanner in, Estoque estoque) {
         //Inicializa ArrayList com os produtos que serão comprados pelo cliente
-        ArrayList<Produto> compraAtual;
+        ArrayList<ItemDeVenda> compraAtual;
         compraAtual = new ArrayList<>();
-        Produto sendoComprado;
+
+        ItemDeVenda itemComprado;
+
+        //Declara um objeto que será usado pra alocar cada produto encontrado pelo leitor
+        ItemDeEstoque sendoComprado;
         int gramas, unidades;
         double total = 0;
         boolean computando = true;
@@ -45,38 +43,75 @@ public class Mercado {
             System.out.println("1 - FINALIZAR COMPRA");
             System.out.print("Cod. do Produto: ");
             String codBarras = in.nextLine();
+
+            //Cancela compra se for digitado 0
             if (codBarras.equals("0")) {
                 System.out.println("| COMPRA CANCELADA |");
                 break;
+            }else if(codBarras.equals("1")){
+                System.out.println("TOTAL: "+total);
+                break;
             }
 
-            sendoComprado = procuraProduto(codBarras);
+            //Procura o produto no estoque, caso não exista ele voltará para o while
+            sendoComprado = procuraItemNoEstoque(codBarras, estoque);
             if (sendoComprado == null) {
                 System.out.println("PRODUTO NÃO EXISTE");
                 System.out.println("");
-            } else if (sendoComprado.isVendidoPorPeso()) {
+                //Se for vendido por peso, o calculo é diferente    
+            } else if (sendoComprado.getProduto().isVendidoPorPeso()) {
                 //Se for TRUE ele vai pegar o valor 
-                System.out.println("Qual a quantidade em gramas de" + sendoComprado.getNome() + "? (apenas números)");
+                System.out.println("Qual a quantidade em gramas de" + sendoComprado.getProduto().getNome() + "? (apenas números)");
                 gramas = in.nextInt();
-                total += ((gramas * sendoComprado.getPreco()) / 1000);
+                total += ((gramas * sendoComprado.getPrecoItem()) / 1000);
                 in.nextLine();
-
+                //Perguntará quantas unidades do produto atual    
             } else {
-                System.out.println("Quantas unidades de " + sendoComprado.getNome() + "? (apenas números)");
+                System.out.println("Quantas unidades de " + sendoComprado.getProduto().getNome() + "? (apenas números)");
                 unidades = in.nextInt();
-
-                total += ((int) unidades * sendoComprado.getPreco());
                 in.nextLine();
-
+                //testa se a quantidade que o consumidor quer é superior a quantidade em estoque
+                if (sendoComprado.getQuantidade() < unidades) {
+                    System.out.println("Só temos " + sendoComprado.getQuantidade() + " unidade em estoque");
+                    System.out.println("Quantas unidades deseja?");
+                    unidades = in.nextInt();
+                    in.nextLine();
+                }
+                //Faz o calculo da quantidade * preço e vai adicionando na variavel total
+                total += ((int) unidades * sendoComprado.getPrecoItem());
+                //Cria um objeto ItemDeVenda com o produto em questão
+                itemComprado = new ItemDeVenda(sendoComprado.getProduto(), unidades);
+                //Adiciona o ItemDeVenda na lista de itens de venda
+                compraAtual.add(itemComprado);
+                System.out.println("+-----PRODUTO------+----PREÇO----+---QTD---+----SUBTOTAL----+");
+                String alinhamento = "| %-16s | %-11.2f | %-7d | %-14.2f |%n";
+                System.out.format(alinhamento, sendoComprado.getProduto().getNome(), sendoComprado.getPrecoItem(), unidades, (unidades * sendoComprado.getPrecoItem()));
             }
-            
-            System.out.println("Subtotal: " + total);
 
         }
+
+        System.out.println("+-----PRODUTO------+----PREÇO----+---QTD---+----SUBTOTAL----+");
+        String alinhamento = "| %-16s | %-11.2f | %-7.2f | %-14.2f |%n";
+        double subtotal;
+        for (int i = 0; i < compraAtual.size(); i++) {
+            subtotal = compraAtual.get(i).getProduto().getPreco() * compraAtual.get(i).getQuantidade();
+            System.out.format(alinhamento, compraAtual.get(i).getProduto().getNome(), compraAtual.get(i).getProduto().getPreco(), compraAtual.get(i).getQuantidade(), subtotal);
+            
+        }
+        
+        boolean pago = pagamento(total);
+            if (pago) {
+
+            }
+
     }
 
-    private static Produto procuraProduto(String novoItem) {
-        return Colecoes.findProduto(novoItem);
+    private static Produto procuraProdutoNoEstoque(String codBarras, Estoque estoque) {
+        return estoque.findProduto(codBarras);
+    }
+
+    private static ItemDeEstoque procuraItemNoEstoque(String codBarras, Estoque estoque) {
+        return estoque.findItemNoEstoque(codBarras);
     }
 
     private static void novoProduto(Scanner in) {
@@ -97,9 +132,15 @@ public class Mercado {
             vendidoPorPeso = true;
         }
         //Cria novo produto com a entrada do gerente e adiciona no "banco de dados"
-        Produto novo = new Produto(nome, descricao, vendidoPorPeso, codBarras, preco, qtdEstoque);
+        Produto novo = new Produto(nome, descricao, vendidoPorPeso, codBarras, preco);
         Colecoes.addProduto(novo);
 
     }
+
+    private static boolean pagamento(double total) {
+        return true;
+    }
+
+*/
 
 }

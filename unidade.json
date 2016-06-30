@@ -1,0 +1,22 @@
+{"produto":{"codigo": "7898409951404","nome": "OVOMALTINE CHOCOLATE FLOCOS CROCANTES 300g","marca": "OVOMALTINE","categoria":"ALIMENTOS","preco": 6.50,"unitario":true},"quantidade": 5}
+{"produto":{"codigo": "7891000053508","nome": "ACHOCOLATADO NESCAU 2.0 LATA 400g","marca": "NESTLÉ","categoria": "ALIMENTOS","preco": 4.99,"unitario":true},"quantidade": 5}
+{"produto":{"codigo": "7893000394209","nome": "MARGARINA CREMOSA QUALY COM SAL 500g",	"marca": "SADIA","categoria": "FRIOS E lATICÍNIOS","preco": 3.74,"unitario":true},"quantidade": 5}
+{"produto":{"codigo": "7891024132906","nome": "CREME DENTAL COLGATE MÁXIMA PROTEÇÃO ANTICÁRIES 50g","marca": "COLGATE","categoria": "HIGIENE E BELEZA","preco": 1.69,"unitario":true},"quantidade": 5}
+{"produto":{"codigo": "7893000474819","nome": "NUGGETS FRANGO C/PRESUNTO SADIA 300g", "marca": "SADIA","categoria": "CONGELADOS","preco": 4.78,"unitario":true},"quantidade": 5}
+{"produto":{"codigo": "7893000070790","nome": "ESCONDIDINHO SADIA CARNE SECA", "marca": "SADIA","categoria": "CONGELADOS","preco": 14.90,"unitario":true},"quantidade": 5}
+{"produto":{"codigo": "7893000135529","nome": "SALSICHA HOT DOG SADIA FRANGO", "marca": "SADIA","categoria": "CONGELADOS","preco": 7.99,"unitario":true},"quantidade": 5}
+{"produto":{"codigo": "7622300741136","nome": "TRAKINAS MAIS CHOCOLATE 154g", "marca": "KRAFT","categoria": "ALIMENTOS","preco": 2.39,"unitario":true},"quantidade": 5}
+{"produto":{"codigo": "7893500020271","nome": "ARROZ TIO JOAO 1Kg", "marca": "TIO JOÃO","categoria": "ALIMENTOS","preco": 4.45,"unitario":true},"quantidade": 5}
+{"produto":{"codigo": "7891150018846","nome": "SHAMPOO TRESEMMÉ HIDRATAÇÃO PROFUNDA", "marca": "TRESEMMÉ","categoria": "HIGIENE E BELEZA","preco": 11.99,"unitario":true},"quantidade": 5}
+{"produto":{"codigo": "7891024113806","nome": "SABONETE PROTEX BALANCE", "marca": "PROTEX","categoria": "HIGIENE E BELEZA","preco": 2.19,"unitario":true},"quantidade": 5}
+{"produto":{"codigo": "7894900011517","nome": "REFRIGERANTE COCA-COLA 2LT", "marca": "COCA-COLA","categoria": "BEBIDAS","preco": 5.00,"unitario":true},"quantidade": 5}
+{"produto":{"codigo": "7898341430098","nome": "SUCO DEL VALLE MAIS UVA 1LT", "marca": "DEL VALLE","categoria": "BEBIDAS","preco": 4.70,"unitario":true},"quantidade": 5}
+{"produto":{"codigo": "7891149200504","nome": "CERVEJA SKOL 350ml", "marca": "SKOL","categoria": "BEBIDAS","preco": 1.70,"unitario":true},"quantidade": 5}
+{"produto":{"codigo": "7891024193006","nome": "DESINFETANTE PINHO SOL LAVANDA", "marca": "PINHO SOL","categoria": "LIMPEZA","preco": 5.59,"unitario":true},"quantidade": 5}
+{"produto":{"codigo": "7891038009300","nome": "LAVA ROUPAS EM PÓ OMO MULTIAÇÃO 1KG", "marca": "OMO","categoria": "LIMPEZA","preco": 8.10,"unitario":true},"quantidade": 5}
+{"produto":{"codigo": "7896098900208","nome": "DETERGENTE LÍQUIDO YPÊ NEUTRO", "marca": "YPÊ","categoria": "LIMPEZA","preco": 1.50,"unitario":true},"quantidade": 5}
+{"produto":{"codigo": "7891203010056","nome": "PAO DE FORMA PANCO", "marca": "PANCO","categoria": "PADARIA","preco": 5.70,"unitario":true},"quantidade": 5}
+{"produto":{"codigo": "1404", "nome": "BANANA PRATA Kg","marca": "-","categoria":"hortifruti","preco": 6.50,"unitario":false},"quantidade": 5000}
+{"produto":{"codigo": "3508", "nome": "CORAÇÃO DE ALCATRA Kg","marca": "Friboi","categoria": "carnes","preco": 44.99,"unitario":false},"quantidade": 5000}
+{"produto":{"codigo": "4209", "nome": "CEBOLA ROXA Kg", "marca": "-","categoria": "hortifruti","preco": 3.74,"unitario":false},"quantidade": 5000}
+{"produto":{"codigo": "4230", "nome": "BATATA INGLESA Kg", "marca": "-","categoria": "hortifruti","preco": 2.98,"unitario":false},"quantidade": 5000}

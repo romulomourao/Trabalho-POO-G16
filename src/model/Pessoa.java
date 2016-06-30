@@ -3,22 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package model;
 
 /**
  *
- * @author romul
+ * @author romulo
  */
-public class Funcionario {
+public abstract class Pessoa {
+    private final String nome;
+    private final String cpf;
 
-    private String nome;
-    private String cpf;
-    private boolean privilegios;
-
-    public Funcionario(String nome, String cpf, boolean privilegios) {
+    public Pessoa(String nome, String cpf) {
         this.nome = nome;
         this.cpf = cpf;
-        this.privilegios = privilegios;
-        
     }
 
     public String getNome() {
@@ -28,12 +25,6 @@ public class Funcionario {
     public String getCpf() {
         return cpf;
     }
- 
-    public boolean getPrivilegios() {
-        return privilegios;
-    }
- 
     
     
-
 }
