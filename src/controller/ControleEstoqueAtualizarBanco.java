@@ -42,7 +42,7 @@ public class ControleEstoqueAtualizarBanco implements ActionListener {
             } else {
                 quantidade = Integer.parseInt(texto);
             }
-            new OperacaoNoBanco().atualizaQuantidade(codigo, quantidade);
+            OperacaoNoBanco.getInstance().atualizaQuantidade(codigo, quantidade);
         } catch (Exception evt) {
             JOptionPane.showMessageDialog(null, "QUANTIDADE INVÁLIDA!");
             campoQuantidade.setText("");

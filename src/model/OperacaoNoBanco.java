@@ -97,7 +97,7 @@ public class OperacaoNoBanco {
         return resp;
     }
 
-    public static ItemEstoque consultaERetornaItemDeEstoque(String codigo) {
+    public ItemEstoque consultaERetornaItemDeEstoque(String codigo) {
         ItemEstoque resp = null;
         Gson gson = new Gson();
         FindIterable<Document> iterable = db.getCollection("produtos").find(new Document("produto.codigo", codigo));

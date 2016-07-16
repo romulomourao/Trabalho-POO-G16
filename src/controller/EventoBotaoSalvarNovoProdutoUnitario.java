@@ -54,7 +54,7 @@ public class EventoBotaoSalvarNovoProdutoUnitario implements ActionListener {
             respPreco = respPreco.replace(",", ".");
             double preco = Double.parseDouble(respPreco);
             int quantidade = Integer.parseInt(respQtd);
-            new OperacaoNoBanco().insereNovoProduto(cod, nome.toUpperCase(), marca.toUpperCase(), categoria.toUpperCase(), preco, quantidade, true);
+            OperacaoNoBanco.getInstance().insereNovoProduto(cod, nome.toUpperCase(), marca.toUpperCase(), categoria.toUpperCase(), preco, quantidade, true);
             janela.dispose();
 
         }

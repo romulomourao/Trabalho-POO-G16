@@ -156,7 +156,7 @@ public class ActionVenda implements KeyListener, ActionListener {
                 Pagamento pagamento = pagar();
                 Venda venda = new Venda(header.getCaixa(), header.getName(), header.getCliente(), totalDaVenda, conjuntoDositens,pagamento);
                 
-                new OperacaoNoBanco().insereNovoProduto2(venda);
+                OperacaoNoBanco.getInstance().insereNovoProduto2(venda);
                 zerarValores();
                 header.zerarCliente();
                 break;

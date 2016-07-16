@@ -42,7 +42,7 @@ public class ActionVenda2 implements KeyListener, ActionListener {
     private final JLabel labelTotal;
     private java.util.Map<String, ItemDeVenda> conjuntoDositens;
     private final PainelDeUsuario header;
-    private OperacaoNoBanco bancoDeDados;
+    private final OperacaoNoBanco bancoDeDados;
 
     public ActionVenda2(JLabel labelTotal, DefaultTableModel modeloTabela, PainelDeUsuario header) {
         this.modeloTabela = modeloTabela;
@@ -51,7 +51,7 @@ public class ActionVenda2 implements KeyListener, ActionListener {
         this.labelTotal = labelTotal;
         this.conjuntoDositens = new HashMap<>();
         this.header = header;
-        this.bancoDeDados = new OperacaoNoBanco();
+        this.bancoDeDados = OperacaoNoBanco.getInstance();
     }
 
     @Override
@@ -119,7 +119,7 @@ public class ActionVenda2 implements KeyListener, ActionListener {
                 //Verifica quantidade disponivel no banco                              
                 quantidadeEmEstoque = item.getQuantidade();
                 if (!temDisponivel(quantidadeEmEstoque, quantidadeComprada)) {
-                    gramas = JOptionPane.showInputDialog("Temos apenas " + quantidadeComprada + "gramas em estoque, digite uma nova quantidade: ");
+                    gramas = JOptionPane.showInputDialog("Temos apenas " + quantidadeEmEstoque + " gramas em estoque, digite uma nova quantidade: ");
                     quantidadeComprada = Integer.parseInt(gramas);
 
                 }
@@ -156,7 +156,7 @@ public class ActionVenda2 implements KeyListener, ActionListener {
                 Pagamento pagamento = pagar();
                 Venda venda = new Venda(header.getCaixa(), header.getName(), header.getCliente(), totalDaVenda, conjuntoDositens, pagamento);
 
-                new OperacaoNoBanco().insereNovoProduto2(venda);
+                OperacaoNoBanco.getInstance().insereNovoProduto2(venda);
                 zerarValores();
                 header.zerarCliente();
                 break;

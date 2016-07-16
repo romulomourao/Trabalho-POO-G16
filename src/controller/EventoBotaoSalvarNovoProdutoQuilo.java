@@ -53,7 +53,7 @@ public class EventoBotaoSalvarNovoProdutoQuilo implements ActionListener {
             respPreco = respPreco.replace(",", ".");
             double preco = Double.parseDouble(respPreco);
             int quantidade = Integer.parseInt(respQtd);           
-            new OperacaoNoBanco().insereNovoProduto(cod, nome.toUpperCase(), marca.toUpperCase(), categoria.toUpperCase(), preco, quantidade, false);
+            OperacaoNoBanco.getInstance().insereNovoProduto(cod, nome.toUpperCase(), marca.toUpperCase(), categoria.toUpperCase(), preco, quantidade, false);
             janela.dispose();
 
         }

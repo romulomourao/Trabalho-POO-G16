@@ -23,7 +23,7 @@ public class ControleEstoqueJanelas implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JFrame janela;
         String codigo = JOptionPane.showInputDialog("CÓDIGO DO PRODUTO: ");
-        ItemEstoque item = new OperacaoNoBanco().consultaERetornaItemDeEstoque(codigo);
+        ItemEstoque item = OperacaoNoBanco.getInstance().consultaERetornaItemDeEstoque(codigo);
         int quantidadeEmEstoque = item.getQuantidade();
         String nome = item.getProduto().getNome();
         if (item.getProduto().isUnitario()) {

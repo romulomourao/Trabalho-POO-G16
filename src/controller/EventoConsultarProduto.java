@@ -32,7 +32,7 @@ public class EventoConsultarProduto implements KeyListener {
 
 
     private void consultaPeloCodigo(String cod) {
-        ItemEstoque item = new OperacaoNoBanco().consultaERetornaItemDeEstoque(cod);
+        ItemEstoque item = OperacaoNoBanco.getInstance().consultaERetornaItemDeEstoque(cod);
         encontrado = item.getProduto().getNome() +"\nR$ "+item.getProduto().getPreco();
 
     }
