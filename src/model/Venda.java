@@ -16,19 +16,19 @@ import java.util.Set;
 public class Venda {
 
     
-    private final String idDaVenda, cpfCliente, cpfFuncionario;
+    private final String idDaVenda, cpfCliente, nomeFuncionario;
     private final String numeroDoCaixa;
     private final double valorTotal;
     private final Data data;
     private Pagamento pagamento;
     private final java.util.Set<ItemDeVenda> itensComprados;
 
-    public Venda(String numeroDoCaixa, String cpfFuncionario, String cpfCliente, double total, Map<String,ItemDeVenda> conjuntoDositens, Pagamento pagamento) {
+    public Venda(String numeroDoCaixa, String nomeFuncionario, String cpfCliente, double total, Map<String,ItemDeVenda> conjuntoDositens, Pagamento pagamento) {
         this.data = new Data();
         this.valorTotal = total;
         this.numeroDoCaixa = numeroDoCaixa;
         this.cpfCliente = cpfCliente;
-        this.cpfFuncionario = cpfFuncionario;
+        this.nomeFuncionario = nomeFuncionario;
         this.idDaVenda = this.data.getAno() + this.data.getMes()+this.data.getDia()+this.data.getHorarioJunto()+"-"+numeroDoCaixa;
         this.itensComprados = conjunto(conjuntoDositens);
         this.pagamento = pagamento;

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SUPERMERCADO JAVA</title>
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="style-cupom.css">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="cupom">
+		<table id="header">
+			<tr>
+				<td><img src="java.png" width="100px" height="100px" alt=""></td>
+				<td><p>JAVA SUPERMERCADO</p></td>
+			</tr>		
+		</table>
+	  <div id="relatorio">	 
+
+	  <table>
+	    	<thead>
+	            <th class="sort" data-sort="id">ID da Venda</th>
+	            <th class="sort" data-sort="horario">Hora</th>
+	            <th class="sort" data-sort="caixa">Caixa</th>
+	            <th class="sort" data-sort="funcionario">Funcionario</th>
+	            <th class="sort" data-sort="valor">Total da Venda</th>
+        </thead>
+	    <tbody class="list">
+	

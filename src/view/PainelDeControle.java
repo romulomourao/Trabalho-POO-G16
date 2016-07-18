@@ -7,6 +7,8 @@ package view;
 
 import controller.ActionsPainelDeControle;
 import controller.ControleEstoqueJanelas;
+import controller.EventoBotaoInventario;
+import controller.EventoBotaoRelatorio;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,7 +25,7 @@ import javax.swing.SwingConstants;
  */
 public class PainelDeControle extends PainelInterno{
     
-    private JButton salvarTudo, atualizarEstoque,cadastrarProdutoUnidade, relatorio,cadastrarProdutoQuilo;
+    private JButton inventario, atualizarEstoque,cadastrarProdutoUnidade, relatorio,cadastrarProdutoQuilo;
 
 
     public PainelDeControle(LayoutManager layout, int vertical, int horizontal) {
@@ -35,7 +37,7 @@ public class PainelDeControle extends PainelInterno{
 
     
     private void autenticacao(){
-            ActionsPainelDeControle actionGerente = new ActionsPainelDeControle(salvarTudo, atualizarEstoque,cadastrarProdutoUnidade, relatorio);
+            ActionsPainelDeControle actionGerente = new ActionsPainelDeControle(inventario, atualizarEstoque,cadastrarProdutoUnidade, relatorio);
            // this.addComponentListener(actionGerente);                      
     }
 
@@ -62,10 +64,14 @@ public class PainelDeControle extends PainelInterno{
         });
         //Botão GerarRelatorio
         relatorio = new Botao("Relatório");
-        //Botão Cadastrar Produtos
-        salvarTudo = new Botao("Salvar");
+        EventoBotaoRelatorio actionRelatorio = new EventoBotaoRelatorio();
+        relatorio.addActionListener(actionRelatorio);
+        //Botão Inventario
+        inventario = new Botao("Inventário");
+        EventoBotaoInventario actionInventario = new EventoBotaoInventario();
+        inventario.addActionListener(actionInventario);
     
-        this.add(salvarTudo, SwingConstants.CENTER);
+        this.add(inventario, SwingConstants.CENTER);
         this.add(relatorio, SwingConstants.CENTER);
         this.add(atualizarEstoque, SwingConstants.CENTER);
         this.add(cadastrarProdutoUnidade, SwingConstants.CENTER);

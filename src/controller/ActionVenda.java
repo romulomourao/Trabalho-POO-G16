@@ -40,19 +40,17 @@ public class ActionVenda implements KeyListener, ActionListener {
     private final DefaultTableModel modeloTabela;
     private double totalDaVenda;
     private final JLabel labelTotal;
-    private final Estoque estoque;
     private java.util.Map<String, ItemDeVenda> conjuntoDositens;
     private final PainelDeUsuario header;
-    private OperacaoNoBanco bancoDeDados;
+    private final OperacaoNoBanco bancoDeDados;
 
     public ActionVenda(JLabel labelTotal, DefaultTableModel modeloTabela, PainelDeUsuario header) {
         this.modeloTabela = modeloTabela;
         this.totalDaVenda = 0.0;
-        //this.itens = new HashMap<>();
         this.labelTotal = labelTotal;
-        this.estoque = new Estoque("teste");
         this.conjuntoDositens = new HashMap<>();
         this.header = header;
+        this.bancoDeDados = OperacaoNoBanco.getInstance();
     }
 
     @Override
@@ -87,11 +85,6 @@ public class ActionVenda implements KeyListener, ActionListener {
         for (int i = 0; i < modeloTabela.getRowCount(); i++) {
             if (modeloTabela.getValueAt(i, 0).equals(codigo)) {
                 itemDeVenda = conjuntoDositens.get(codigo);
-                /*
-                if(itemDeVenda.getClass().equals(ItemDeVendaQuilo.class)){
-                    
-                }
-                 */
                 quantidade = (int) modeloTabela.getValueAt(i, 3);
                 preco = itemDeVenda.getPreco();
                 modeloTabela.setValueAt(++quantidade, i, 3);
@@ -110,36 +103,42 @@ public class ActionVenda implements KeyListener, ActionListener {
     private void buscaEColocaNaTabela(String codigo) {
         String nome;
         double preco, subtotal;
-        int quantidade = 1;
+        int quantidadeComprada = 1;
+        int quantidadeEmEstoque;
 
-        ItemDeVenda itemDeVenda;
-        ItemEstoque itemEstoque;
-        if (estoque.acessa().containsKey(codigo)) {
-            itemEstoque = estoque.acessa().get(codigo);
+        ItemDeVenda itemComprado;
+        ItemEstoque item;
+        if (bancoDeDados.existeCodigo(codigo)) {
+            item = bancoDeDados.consultaERetornaItemDeEstoque(codigo);
 
-            if (itemEstoque.getClass().equals(ItemEstoqueQuilo.class)) {
-                itemDeVenda = new ItemDeVendaQuilo(itemEstoque);
+            if (item.getClass().equals(ItemEstoqueQuilo.class)) {
+                itemComprado = new ItemDeVendaQuilo(item);
                 String gramas = JOptionPane.showInputDialog("Quantidade em gramas: ");
-                //Verifica quantidade disponivel no banco
-                
-                quantidade = Integer.parseInt(gramas);
-                itemDeVenda.setQuantidade(quantidade);
+                quantidadeComprada = Integer.parseInt(gramas);
+                //Verifica quantidade disponivel no banco                              
+                quantidadeEmEstoque = item.getQuantidade();
+                if (!temDisponivel(quantidadeEmEstoque, quantidadeComprada)) {
+                    gramas = JOptionPane.showInputDialog("Temos apenas " + quantidadeEmEstoque + " gramas em estoque, digite uma nova quantidade: ");
+                    quantidadeComprada = Integer.parseInt(gramas);
+
+                }
+                itemComprado.setQuantidade(quantidadeComprada);
             } else {
-                itemDeVenda = new ItemDeVendaUnidade(itemEstoque);
+                itemComprado = new ItemDeVendaUnidade(item);
             }
-            conjuntoDositens.put(codigo, itemDeVenda);
-            nome = itemEstoque.getProduto().getNome();
-            preco = itemDeVenda.getPreco();
-            subtotal = itemDeVenda.subtotal(quantidade);
+            conjuntoDositens.put(codigo, itemComprado);
+            nome = item.getProduto().getNome();
+            preco = itemComprado.getPreco();
+            subtotal = itemComprado.subtotal(quantidadeComprada);
             totalDaVenda += subtotal;
             labelTotal.setText("TOTAL: R$ " + String.format("%.2f", totalDaVenda));
-            modeloTabela.addRow(new Object[]{codigo, nome, preco, quantidade, subtotal});
+            modeloTabela.addRow(new Object[]{codigo, nome, preco, quantidadeComprada, subtotal});
         } else {
             JOptionPane.showMessageDialog(null, "Este código não consta em nosso estoque", "ALGO DEU ERRADO...", ERROR_MESSAGE);
         }
 
     }
-
+    //Ações do painel de Vendas
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (((JButton) e.getSource()).getText()) {
@@ -147,16 +146,17 @@ public class ActionVenda implements KeyListener, ActionListener {
                 zerarValores();
                 header.zerarCliente();
                 break;
-                
+
             case "CPF NA NOTA":
                 header.setarCliente();
                 break;
             case "Finalizar Venda":
                 salvaItensDaTabela();
                 Pagamento pagamento = pagar();
-                Venda venda = new Venda(header.getCaixa(), header.getName(), header.getCliente(), totalDaVenda, conjuntoDositens,pagamento);
+                Venda venda = new Venda(header.getCaixa(), header.getUsuario(), header.getCliente(), totalDaVenda, conjuntoDositens, pagamento);
+                bancoDeDados.atualizaQuantidade(conjuntoDositens);
+                bancoDeDados.salvaVenda(venda);
                 
-                OperacaoNoBanco.getInstance().insereNovoProduto2(venda);
                 zerarValores();
                 header.zerarCliente();
                 break;
@@ -166,7 +166,6 @@ public class ActionVenda implements KeyListener, ActionListener {
         }
 
     }
-
 
     private void zerarValores() {
         totalDaVenda = 0.0;
@@ -185,7 +184,7 @@ public class ActionVenda implements KeyListener, ActionListener {
         for (int i = 0; i < linhas; i++) {
             codigo = (String) modeloTabela.getValueAt(i, 0);
             quantidade = (int) modeloTabela.getValueAt(i, 3);
-            itemNoEstoque = estoque.acessa().get(codigo);
+            itemNoEstoque = bancoDeDados.consultaERetornaItemDeEstoque(codigo);
             itemVendido = itemVendido(itemNoEstoque, quantidade);
             this.conjuntoDositens.put(codigo, itemVendido);
         }
@@ -203,8 +202,8 @@ public class ActionVenda implements KeyListener, ActionListener {
         novo = new ItemDeVendaQuilo(itemNoEstoque, quantidade);
         return novo;
     }
-    
-        private Pagamento pagar() {
+
+    private Pagamento pagar() {
         Pagamento pagamento;
         double recebido;
         int parcela;
@@ -231,6 +230,10 @@ public class ActionVenda implements KeyListener, ActionListener {
         }
 
         return pagamento;
+    }
+
+    private boolean temDisponivel(int qtdEmEstoque, int qtdComprada) {
+        return qtdEmEstoque >= qtdComprada;
     }
 
 }

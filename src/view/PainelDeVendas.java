@@ -5,7 +5,7 @@
  */
 package view;
 
-import controller.ActionVenda2;
+import controller.ActionVenda;
 import controller.EventoMudarFuncionarioECaixa;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -30,7 +30,7 @@ public class PainelDeVendas extends PainelInterno {
     private JPanel painelSideBar, painelSuperior;
     private PainelDeUsuario header;
     private ActionListener actionMudaFuncionario;
-    private ActionVenda2 actionVenda;
+    private ActionVenda actionVenda;
     private JLabel labelTotal;
     private JTextField campoDeBusca;
     private JTable tabela;
@@ -93,7 +93,7 @@ public class PainelDeVendas extends PainelInterno {
     private void barraDeBusca() {
         //Barra de Busca
         campoDeBusca = new CampoDeTexto("","#009688");
-        actionVenda = new ActionVenda2(labelTotal, modeloTabela, header);
+        actionVenda = new ActionVenda(labelTotal, modeloTabela, header);
         campoDeBusca.addKeyListener(actionVenda);
         // this.add(campoDeBusca, BorderLayout.BEFORE_FIRST_LINE);
         //teste        

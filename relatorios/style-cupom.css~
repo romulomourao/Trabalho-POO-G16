@@ -8,10 +8,6 @@
 			line-height:40px;
 		}
 
-		p{
-			font-weight:bold;
-		}
-
 		#cupom{
 			margin: 0 auto;
 			width:1000px;
@@ -28,9 +24,7 @@
 			list-style: none;
 		}
 
-		#relatorio{
-			text-align:center;
-		}
+		
 
 		#produtos{
 			clear: both;
@@ -50,8 +44,8 @@
 		
 		
 
-		#header td{
+		#header{
 			margin:0 auto;
-			border-style:hidden;
+			border-style:none;
 			
 		}

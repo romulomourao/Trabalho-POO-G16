@@ -18,7 +18,7 @@ input:focus {
 .sort {
   padding:8px 30px;
   border-radius: 6px;
-  border: 2px solid white;
+  border: 1px solid white;
   color:#fff;
   text-decoration: none;
   background-color: #28a8e0;

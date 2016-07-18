@@ -6,23 +6,25 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class OperacaoNoBanco {
 
-    private static  OperacaoNoBanco instancia = new OperacaoNoBanco();
-    private static final  MongoClient mongoClient = new MongoClient("localhost", 27016);
+    private static OperacaoNoBanco instancia = new OperacaoNoBanco();
+    private static final MongoClient mongoClient = new MongoClient("localhost", 27016);
     private static final MongoDatabase db = mongoClient.getDatabase("mercado");
 
     private OperacaoNoBanco() {
 
     }
 
-   public static synchronized OperacaoNoBanco getInstance(){
-       if(instancia==null){
-           instancia = new OperacaoNoBanco();
-       }
-       return instancia;
-   }
+    public static synchronized OperacaoNoBanco getInstance() {
+        if (instancia == null) {
+            instancia = new OperacaoNoBanco();
+        }
+        return instancia;
+    }
 
     public void findAll(String colection) {
         FindIterable<Document> iterable = db.getCollection(colection).find();
@@ -72,30 +74,14 @@ public class OperacaoNoBanco {
 
     }
 
-    public void insereNovoProduto2(Venda itens) {
+    public void salvaVenda(Venda itens) {
         Gson gson = new Gson();
         String json = gson.toJson(itens);
         // Parse to bson document and insert
         Document doc = Document.parse(json);
-        db.getCollection("test").insertOne(doc);
+        db.getCollection("vendas").insertOne(doc);
     }
 
-    public void salvaVenda() {
-
-    }
-
-    public String consultaPeloCodigo(String codigo) {
-
-        String resp = "";
-        FindIterable<Document> iterable = db.getCollection("produtos").find(new Document("codigo", codigo));
-        if (iterable.first() == null) {
-            return resp;
-        }
-
-        resp = "NOME: " + iterable.first().getString("nome") + "\n";
-        resp += "PREÇO: R$ " + iterable.first().getDouble("preco");
-        return resp;
-    }
 
     public ItemEstoque consultaERetornaItemDeEstoque(String codigo) {
         ItemEstoque resp = null;
@@ -126,6 +112,19 @@ public class OperacaoNoBanco {
 
     }
 
+    public void atualizaQuantidade(Map<String, ItemDeVenda> conjuntoDositens) {
+        int qtdComprada, qtdEmEstoque;        
+        for (String codigo : conjuntoDositens.keySet()) {
+            qtdComprada = conjuntoDositens.get(codigo).getQuantidade();
+          FindIterable<Document> iterable = db.getCollection("produtos").find(new Document("produto.codigo", codigo));
+           qtdEmEstoque = iterable.first().getInteger("quantidade");
+           qtdEmEstoque = qtdEmEstoque - qtdComprada;
+            db.getCollection("produtos").updateOne(new Document("produto.codigo", codigo),
+                    new Document("$set", new Document("quantidade", qtdEmEstoque)));
+        }
+
+    }
+
     public boolean existeCodigo(String codigo) {
         boolean resp = false;
         FindIterable<Document> iterable = db.getCollection("produtos").find(new Document("produto.codigo", codigo));
@@ -143,6 +142,26 @@ public class OperacaoNoBanco {
         int quantidadeEmEstoque = iterable.first().getInteger("quantidade");
         return 0;
 
+    }
+
+    public Relatorio relatorioDeVendas(String dia, String mes, String ano) {
+        Map<String, Object> data = new HashMap();
+        data.put("data.dia", dia);
+        data.put("data.mes", mes);
+        data.put("data.ano", ano);
+        Gson gson = new Gson();
+        FindIterable<Document> iterable = db.getCollection("vendas").find(new Document(data));
+        Relatorio relatorio = new Relatorio();
+        iterable.forEach(relatorio);
+        return relatorio;
+
+    }
+
+    public Inventario invetarioDeEstoque() {
+        FindIterable<Document> iterable = db.getCollection("produtos").find();
+        Inventario inventario = new Inventario();
+        iterable.forEach(inventario);
+        return inventario;
     }
 
 }

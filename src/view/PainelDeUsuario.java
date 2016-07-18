@@ -17,11 +17,10 @@ import javax.swing.JTextArea;
  */
 public class PainelDeUsuario extends PainelInterno {
 
-    private String cpfUsuario, numeroCaixa, nomeUsuario, cpfCliente;
+    private String nomeUsuario, numeroCaixa, cpfCliente;
     private JTextArea usuarioHeader;
 
     public PainelDeUsuario() {
-        this.nomeUsuario = "";
         this.cpfCliente = "";
         usuario();
         informacaoHeader();
@@ -29,7 +28,6 @@ public class PainelDeUsuario extends PainelInterno {
     }
 
     PainelDeUsuario(BorderLayout borderLayout, boolean b) {
-        this.nomeUsuario = "";
         this.cpfCliente = "";
         usuario();
         informacaoHeader();
@@ -40,7 +38,7 @@ public class PainelDeUsuario extends PainelInterno {
         String[] caixas = {"1", "2", "3"};
         String[] usuarios = {"Romulo", "Igor", "Suelen"};
         ImageIcon icone = new ImageIcon("img/user.png");
-        cpfUsuario = (String) JOptionPane.showInputDialog(null, "FUNCIONARIO:", "JAVA SUPERMERCADO", JOptionPane.OK_OPTION, icone, usuarios, usuarios[0]);
+        nomeUsuario = (String) JOptionPane.showInputDialog(null, "FUNCIONARIO:", "JAVA SUPERMERCADO", JOptionPane.OK_OPTION, icone, usuarios, usuarios[0]);
         icone = new ImageIcon("img/cashier.png");
         numeroCaixa = (String) JOptionPane.showInputDialog(null, "CAIXA:", "JAVA SUPERMERCADO", JOptionPane.OK_OPTION, icone, caixas, caixas[0]);
         if (numeroCaixa == null) {
@@ -48,18 +46,18 @@ public class PainelDeUsuario extends PainelInterno {
         }
 
         //ir na lista de funcionarios
-        JOptionPane.showMessageDialog(null, "Seja Bem-Vindo, " + cpfUsuario + "\n\nVocê está no CAIXA Nº " + numeroCaixa);
+        JOptionPane.showMessageDialog(null, "Seja Bem-Vindo, " + nomeUsuario + "\n\nVocê está no CAIXA Nº " + numeroCaixa);
         // Funcionario usuario = new Funcionario(nome, cpf);
     }
 
     private void informacaoHeader() {
-        usuarioHeader = new Texto("FUNCIONARIO: " + cpfUsuario + "\nCAIXA: " + numeroCaixa+ "\nCLIENTE: " + cpfCliente, 14, 20, 20, "#03A9F4");
+        usuarioHeader = new Texto("FUNCIONARIO: " + nomeUsuario + "\nCAIXA: " + numeroCaixa+ "\nCLIENTE: " + cpfCliente, 14, 20, 20, "#03A9F4");
         this.add(usuarioHeader, 0);
         // this.add(usuarioHeader, BorderLayout.CENTER);
     }
 
     public String getUsuario() {
-        return this.cpfUsuario;
+        return this.nomeUsuario;
     }
 
     public String getCaixa() {
@@ -76,19 +74,19 @@ public class PainelDeUsuario extends PainelInterno {
 
     public void alterar() {
         usuario();
-        usuarioHeader.setText("FUNCIONARIO: " + cpfUsuario + "\nCAIXA: " + numeroCaixa);
+        usuarioHeader.setText("FUNCIONARIO: " + nomeUsuario + "\nCAIXA: " + numeroCaixa);
         this.repaint();
     }
 
     public void setarCliente() {
         this.cpfCliente = JOptionPane.showInputDialog("CPF CLIENTE: ");
-        usuarioHeader.setText("FUNCIONARIO: " + cpfUsuario + "\nCAIXA: " + numeroCaixa + "\nCLIENTE: " + cpfCliente);
+        usuarioHeader.setText("FUNCIONARIO: " + nomeUsuario + "\nCAIXA: " + numeroCaixa + "\nCLIENTE: " + cpfCliente);
         this.repaint();
     }
     
      public void zerarCliente() {
         this.cpfCliente = "";
-        usuarioHeader.setText("FUNCIONARIO: " + cpfUsuario + "\nCAIXA: " + numeroCaixa + "\nCLIENTE: " + cpfCliente);
+        usuarioHeader.setText("FUNCIONARIO: " + nomeUsuario + "\nCAIXA: " + numeroCaixa + "\nCLIENTE: " + cpfCliente);
         this.repaint();
     }
 
