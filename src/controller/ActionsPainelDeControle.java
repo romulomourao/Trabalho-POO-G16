@@ -20,13 +20,17 @@ import view.TelaDeLogin;
 public class ActionsPainelDeControle implements ComponentListener, ActionListener {
 
     private JButton salvarTudo, atualizarEstoque, cadastrarProdutos, relatorio;
+    private final JButton cadastrarProdutoQuilo;
 
-    public ActionsPainelDeControle(JButton salvarTudo, JButton atualizarEstoque, JButton cadastrarProdutos, JButton relatorio) {
+    public ActionsPainelDeControle(JButton salvarTudo, JButton atualizarEstoque, JButton cadastrarProdutos, JButton relatorio, JButton cadastrarProdutoQuilo) {
         this.salvarTudo = salvarTudo;
         this.atualizarEstoque = atualizarEstoque;
         this.cadastrarProdutos = cadastrarProdutos;
         this.relatorio = relatorio;
+        this.cadastrarProdutoQuilo = cadastrarProdutoQuilo;
+        
     }
+
 
     @Override
     public void componentResized(ComponentEvent e) {
@@ -48,6 +52,7 @@ public class ActionsPainelDeControle implements ComponentListener, ActionListene
             relatorio.setVisible(true);
             cadastrarProdutos.setVisible(true);
             atualizarEstoque.setVisible(true);
+            cadastrarProdutoQuilo.setVisible(true);
         }
 
     }
@@ -59,6 +64,7 @@ public class ActionsPainelDeControle implements ComponentListener, ActionListene
         relatorio.setVisible(false);
         cadastrarProdutos.setVisible(false);
         atualizarEstoque.setVisible(false);
+        cadastrarProdutoQuilo.setVisible(false);
     }
 
     @Override

@@ -30,15 +30,17 @@ public class PainelDeControle extends PainelInterno{
 
     public PainelDeControle(LayoutManager layout, int vertical, int horizontal) {
         super(layout, vertical, horizontal);
+        
         criaElementos();
         autenticacao();
+        
     }
 
 
     
     private void autenticacao(){
-            ActionsPainelDeControle actionGerente = new ActionsPainelDeControle(inventario, atualizarEstoque,cadastrarProdutoUnidade, relatorio);
-           // this.addComponentListener(actionGerente);                      
+            ActionsPainelDeControle actionGerente = new ActionsPainelDeControle(inventario, atualizarEstoque,cadastrarProdutoUnidade, relatorio, cadastrarProdutoQuilo);
+           this.addComponentListener(actionGerente);                      
     }
 
     private void criaElementos() {

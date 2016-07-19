@@ -14,7 +14,7 @@ public class Login {
  
     public static boolean autentica(String username, String password) {
         // hardcoded username and password
-        if (username.equals("a") && password.equals("a")) {
+        if (username.equals("admin") && password.equals("123")) {
             return true;
         }
         return false;

@@ -5,11 +5,13 @@
  */
 package view;
 
+import controller.DadosDeAcesso;
 import java.awt.BorderLayout;
 import java.awt.LayoutManager;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import model.OperacaoNoBanco;
 
 /**
  *
@@ -34,9 +36,9 @@ public class PainelDeUsuario extends PainelInterno {
     }
 
     private void usuario() {
-        
-        String[] caixas = {"1", "2", "3"};
-        String[] usuarios = {"Romulo", "Igor", "Suelen"};
+        DadosDeAcesso dadosIniciais = new DadosDeAcesso();
+        String[] caixas = dadosIniciais.getCaixas();
+        String[] usuarios = dadosIniciais.getUsersName();
         ImageIcon icone = new ImageIcon("img/user.png");
         nomeUsuario = (String) JOptionPane.showInputDialog(null, "FUNCIONARIO:", "JAVA SUPERMERCADO", JOptionPane.OK_OPTION, icone, usuarios, usuarios[0]);
         icone = new ImageIcon("img/cashier.png");

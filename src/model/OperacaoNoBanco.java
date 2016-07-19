@@ -6,6 +6,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
+import controller.DadosDeAcesso;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +38,20 @@ public class OperacaoNoBanco {
         });
     }
 
+    public Usuarios getUsers() {
+        FindIterable<Document> iterable = db.getCollection("funcionarios").find();
+        Usuarios usuarios = new Usuarios();
+        iterable.forEach(usuarios);
+        return usuarios;
+    }
+    
+      public Caixas getCaixas() {
+        FindIterable<Document> iterable = db.getCollection("caixas").find();
+        Caixas caixas = new Caixas();
+        iterable.forEach(caixas);
+        return caixas;
+    }
+
     public void findEquals(String colection) {
         FindIterable<Document> iterable = db.getCollection(colection).find(
                 new Document("marca", "SADIA"));
@@ -63,14 +78,16 @@ public class OperacaoNoBanco {
     }
 
     public void insereNovoProduto(String codigo, String nome, String marca, String categoria, double preco, int quantidade, boolean unitario) {
+       
         Document novo = new Document("codigo", codigo);
         novo.append("nome", nome);
         novo.append("marca", marca);
         novo.append("categoria", categoria);
         novo.append("preco", preco);
-        novo.append("quantidade", quantidade);
         novo.append("unitario", unitario);
-        db.getCollection("produtos").insertOne(novo);
+        Document todo = new Document("produto", novo);        
+        todo.append("quantidade", quantidade);
+        db.getCollection("produtos").insertOne(todo);
 
     }
 
@@ -81,7 +98,6 @@ public class OperacaoNoBanco {
         Document doc = Document.parse(json);
         db.getCollection("vendas").insertOne(doc);
     }
-
 
     public ItemEstoque consultaERetornaItemDeEstoque(String codigo) {
         ItemEstoque resp = null;
@@ -113,12 +129,12 @@ public class OperacaoNoBanco {
     }
 
     public void atualizaQuantidade(Map<String, ItemDeVenda> conjuntoDositens) {
-        int qtdComprada, qtdEmEstoque;        
+        int qtdComprada, qtdEmEstoque;
         for (String codigo : conjuntoDositens.keySet()) {
             qtdComprada = conjuntoDositens.get(codigo).getQuantidade();
-          FindIterable<Document> iterable = db.getCollection("produtos").find(new Document("produto.codigo", codigo));
-           qtdEmEstoque = iterable.first().getInteger("quantidade");
-           qtdEmEstoque = qtdEmEstoque - qtdComprada;
+            FindIterable<Document> iterable = db.getCollection("produtos").find(new Document("produto.codigo", codigo));
+            qtdEmEstoque = iterable.first().getInteger("quantidade");
+            qtdEmEstoque = qtdEmEstoque - qtdComprada;
             db.getCollection("produtos").updateOne(new Document("produto.codigo", codigo),
                     new Document("$set", new Document("quantidade", qtdEmEstoque)));
         }
